@@ -1,4 +1,4 @@
-# 24.MoncadaMorales.JGR-ML
+# 24.MoncadaMorales.unpublished
 Supplemental codes for "Forecasting High Resolution Precipitation Events with Binary Reservoir Computing" by Lizda Nazdira Moncada Morales, Matthew Bonas, Stefano Castruccio and Paola Crippa.
 
 ## Data
