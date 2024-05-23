@@ -7,7 +7,7 @@ Folder containing the latitude and longitude coordinates for the entire region d
 <p align = "center">
   <img src="https://github.com/Env-an-Stat-group/24.MoncadaMorales.JGR-ML/assets/57681632/dad98ffb-80af-41ce-81e3-2d5d7d4fb4a5" alt="F1-HourlyPrecipitationJune22" width="400"/>
   <br>
-  <b>Figure 1:</b> Precipitation in the eastern United States simulated by WRF on June 22, 2018, at 0:00 GMT, over the study domain. The cities of interest are marked with stars for reference in our real data analysis case study.
+  Precipitation in the eastern United States simulated by WRF on June 22, 2018, at 0:00 GMT, over the study domain. The cities of interest are marked with stars for reference in our real data analysis case study.
 </p>
 
 ## Code
