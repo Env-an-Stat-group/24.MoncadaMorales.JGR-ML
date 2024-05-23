@@ -5,7 +5,7 @@ Supplemental codes for "Forecasting High Resolution Precipitation Events with Bi
 Folder containing the latitude and longitude coordinates for the entire region depicted in the manuscript. Due to size constraints, the original PRCP from the WRF output can be found [here](https://www.google.com). Binary converted data for the 10 cities discussed in the manuscript is also included in the file `BinaryHourlyPrecipCities.RData` and is used with the R scripts in the Code folder.
 
 <div align = "center">
-  <img src="https://github.com/Env-an-Stat-group/24.MoncadaMorales.JGR-ML/assets/57681632/dad98ffb-80af-41ce-81e3-2d5d7d4fb4a5" alt="F1-HourlyPrecipitationJune22" width="350"/>
+  <img src="https://github.com/Env-an-Stat-group/24.MoncadaMorales.JGR-ML/assets/57681632/dad98ffb-80af-41ce-81e3-2d5d7d4fb4a5" alt="F1-HourlyPrecipitationJune22" width="400"/>
 </div>
 
 ## Code
