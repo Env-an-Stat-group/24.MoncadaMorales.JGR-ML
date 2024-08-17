@@ -1,4 +1,4 @@
-# 24.MoncadaMorales.JGR-ML [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13334133.svg)](https://doi.org/10.5281/zenodo.13336606)
+# 24.MoncadaMorales.JGR-ML [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13336606.svg)](https://doi.org/10.5281/zenodo.13336606)
 Supplemental codes for "Forecasting High Resolution Precipitation Events with Binary Reservoir Computing" by Lizda Nazdira Moncada Morales, Matthew Bonas, Stefano Castruccio and Paola Crippa.
 
 ## Data
