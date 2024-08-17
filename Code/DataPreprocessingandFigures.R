@@ -271,13 +271,10 @@ all_plots
 ### Figure 4 ###
 ################
 
+load('Figure_4_Data.RData')
+
 
 #short range
-load('ROC_bin_100sims.RData')
-load('ROC_van_100sims.RData')
-load('ROC_log_100sims.RData')
-load('ROC_lstm_100sims.RData')
-load('ROC_pers_100sims.RData')
 
 cols = c("FPR", "TPR")
 colnames(roc_bin) = cols
@@ -315,11 +312,7 @@ p = ggplot() +
 
 
 #####Long-range ROC curves
-load('ROC_long_bin_100sims.RData')
-load('ROC_long_van_100sims.RData')
-load('ROC_long_log_100sims.RData')
-load('ROC_long_lstm_100sims.RData')
-load('ROC_long_pers_100sims.RData')
+
 
 cols = c("FPR", "TPR")
 colnames(roc_long_bin) = cols
@@ -371,7 +364,7 @@ all_plots
 ##############################
 
 
-
+load('Figure_5_Short_Data.RData')
 
 
 #short Range
@@ -379,7 +372,7 @@ all_plots
 
 
 
-load("BinESN_histDat_100Sims.RData")
+#BinESN
 AUC_med_bin=apply(data4hist.bin$ensembAUCs,1,median)
 median(AUC_med_bin)
 quantile(AUC_med_bin,p=c(0.025,0.975))
@@ -390,7 +383,7 @@ quantile(BS_med_bin,p=c(0.025,0.975))
 
 
 
-load("VanESN_histDat_100Sims.RData")
+#ESN
 AUC_med_van=apply(data4hist.van$ensembAUCs,1,median)
 median(AUC_med_van)
 quantile(AUC_med_van,p=c(0.025,0.975))
@@ -399,7 +392,7 @@ median(BS_med_van)
 quantile(BS_med_van,p=c(0.025,0.975))
 
 
-load("ARLog_histDat_100sims.RData")
+#Logistic
 AUC_log=data4hist.log$ensembAUCs
 median(AUC_log)
 quantile(AUC_log,p=c(0.025,0.975))
@@ -409,7 +402,7 @@ quantile(BS_log,p=c(0.025,0.975))
 
 
 
-load("LSTM_histDat_100sims.RData")
+#LSTM
 AUC_lstm=data4hist.lstm$ensembAUCs
 median(AUC_lstm)
 quantile(AUC_lstm,p=c(0.025,0.975))
@@ -419,7 +412,7 @@ quantile(BS_lstm,p=c(0.025,0.975))
 
 
 
-load("Pers_histDat_100sims.RData")
+#Persistence
 AUC_pers=data4hist.pers$ensembAUCs
 median(AUC_pers)
 quantile(AUC_pers,p=c(0.025,0.975))
@@ -447,7 +440,7 @@ p <- ggplot(df, aes(x=Model, y=AUC, fill = Model)) +
                                "Logistic" = "green", 
                                "LSTM" = "purple", 
                                "Persistence" = "blue"))
-# p
+p
 
 df2=data.frame(BS=c(BS_med_bin,BS_med_van,BS_log,BS_lstm,BS_pers),Model=rep(c('BinESN','ESN','Logistic','LSTM','Persistence'),times=c(100,100,100,100,100)))
 #boxplot(BS~Model, data=df2)
@@ -467,7 +460,7 @@ p2 <- ggplot(df2, aes(x=Model, y=BS, fill = Model)) +
                                "LSTM" = "purple", 
                                "Persistence" = "blue"))+
   scale_y_continuous(position = 'left')
-# p2
+p2
 
 
 
@@ -476,11 +469,10 @@ p2 <- ggplot(df2, aes(x=Model, y=BS, fill = Model)) +
 
 #long range
 
-
+load('Figure_5_Long_Data.RData')
 
 
 #logistic regression
-load("ARLogReg_longDat_100sims.RData")
 total_sim=100
 AUC_meds_log=LongRangeData.log$LongAUCs
 Hp_meds_log=LongRangeData.log$LongHps
@@ -508,15 +500,13 @@ BS_meds_bin=rep(0,ntests)
 
 #Load data
 for(i in 1:total_sim){
-  load(paste0('BinESN_longDat',i,'.RData'))
-  list_name <- paste0('LongRangeData', i, '.bin')
-  # Access the list using `get`
-  current_list <- get(list_name)
+  current_list <- BinESN_L96_Long[[i]]
   AUC_bin[,i]=current_list$LongAUCs
   BS_bin[,i]=current_list$LongBS
   AUC_meds_bin[i]=median(AUC_bin[,i])
   BS_meds_bin[i]=median(BS_bin[,i])
 }
+
 
 quantile(as.vector(AUC_bin),p=c(0.025,0.975))
 median(AUC_meds_bin)
@@ -532,7 +522,6 @@ quantile(BS_meds_bin,p=c(0.025,0.975))
 
 
 #standard ESN
-load("VanESN_longDat_100sims.RData")
 total_sim=100
 AUC_meds_van=rep(NA,total_sim)
 Hp_meds_van=rep(NA,total_sim)
@@ -616,7 +605,6 @@ quantile(BS_meds_pers,p=c(0.025,0.975))
 
 
 #LSTM
-load("LSTM_longDat_100sims.RData")
 total_sim=100
 AUC_meds_lstm=rep(NA,total_sim)
 Hp_meds_lstm=rep(NA,total_sim)
@@ -656,7 +644,7 @@ p3 <- ggplot(df3, aes(x=Model, y=AUC, fill = Model)) +
                                "LSTM" = "purple", 
                                "Persistence" = "blue"))+
   scale_y_continuous(position = 'right')
-#p3
+p3
 
 df4=data.frame(BS=c(BS_meds_bin,BS_meds_van,BS_meds_log,BS_meds_lstm,BS_meds_pers),Model=rep(c('BinESN','ESN','Logistic','LSTM','Persistence'),times=c(100,100,100,100,100)))
 #boxplot(BS~Model, data=df2)
@@ -676,7 +664,7 @@ p4 <- ggplot(df4, aes(x=Model, y=BS, fill = Model)) +
                                "LSTM" = "purple", 
                                "Persistence" = "blue")) +
   scale_y_continuous(position = 'right')
-#p4
+p4
 
 #all_plots = ggarrange(p,p2,p3,p4, nrow=2, ncol=2, labels=c('A','B','C','D'))
 #ggsave('BoxPlot_Panel_100sims.png')
@@ -699,12 +687,8 @@ brier_plots
 ################
 
 
+load('Figure_6_Data.RData')
 
-load('ROC_bin_App.RData')
-load('ROC_van_App.RData')
-load('ROC_log_App.RData')
-load('ROC_lstm_App.RData')
-load('ROC_pers_App.RData')
 
 cols = c("FPR", "TPR")
 colnames(roc_bin) = cols
@@ -738,15 +722,10 @@ p = ggplot() +
                                 "Persistence" = "blue")) +
   guides(color = guide_legend(override.aes = list(linewidth = 2)))
 
-#print(p)
+print(p)
 
 
 #####ROC Curve
-load('ROC_long_bin_App.RData')
-load('ROC_long_van_App.RData')
-load('ROC_long_log_App.RData')
-load('ROC_long_lstm_App.RData')
-load('ROC_long_pers_App.RData')
 
 cols = c("FPR", "TPR")
 colnames(roc_long_bin) = cols
@@ -776,7 +755,7 @@ p2 = ggplot() +
                                 "Persistence" = "blue")) +
   scale_y_continuous(position = 'right') +
   theme(legend.position = "none")#+guides(color = guide_legend(title = "Model"))
-#print(p2)
+print(p2)
 
 
 
@@ -795,8 +774,11 @@ all_plots
 ### Figure 7 and Figure S3 ###
 ##############################
 
+load('Figure_7_Data.RData')
 
-load('Logistic_histDat_App1.RData')
+
+
+#logistic
 auc_log=store.mat.log[,1]
 median(auc_log)
 quantile(auc_log,p=c(0.025,0.975))
@@ -805,7 +787,7 @@ bs_log=store.mat.log[,3]
 median(bs_log)
 quantile(bs_log,p=c(0.025,0.975))
 
-load("BinESN_histDat_App1.RData")
+#BinESN
 auc_bin=data4hist.bin$ensembAUCs
 median(auc_bin)
 (median(auc_bin)-median(auc_log))/median(auc_log)
@@ -816,7 +798,7 @@ median(bs_bin)
 (median(bs_log)-median(bs_bin))/median(bs_log)
 quantile(bs_bin,p=c(0.025,0.975))
 
-load("VanESN_histDat_App1.RData")
+#ESN
 auc_van=data4hist.van$ensembAUCs
 median(auc_van)
 (median(auc_van)-median(auc_log))/median(auc_log)
@@ -827,7 +809,7 @@ median(bs_van)
 (median(bs_log)-median(bs_van))/median(bs_log)
 quantile(bs_van,p=c(0.025,0.975))
 
-load("LSTM_histDat_App1.RData")
+#LSTM
 auc_lstm=data4hist.lstm$AUC.lstm
 median(auc_lstm)
 (median(auc_lstm)-median(auc_log))/median(auc_log)
@@ -862,6 +844,11 @@ yValid=input.data$yValid
 xValid=input.data$xValid
 xTest=input.data$xTest
 yTest = input.data$yTest
+
+
+###Binary Cross-Entropy
+yi=as.vector(yTest)
+pi=as.vector(rawData[(24*22):(24*23-1),])
 
 
 ####Confusion matrix
